@@ -1,0 +1,7 @@
+set(_CATKIN_CURRENT_PACKAGE "darwin_gazebo")
+set(darwin_gazebo_MAINTAINER "Philippe Capdepuy <pc@humarobotics.com>")
+set(darwin_gazebo_DEPRECATED "")
+set(darwin_gazebo_VERSION "0.1.0")
+set(darwin_gazebo_BUILD_DEPENDS "gazebo_ros" "rospy" "gazebo_ros_control" "sensor_msgs")
+set(darwin_gazebo_RUN_DEPENDS "gazebo_ros" "rospy" "gazebo_ros_control" "sensor_msgs" "darwin_description" "hector_gazebo_plugins")
+set(darwin_gazebo_BUILDTOOL_DEPENDS "catkin")

@@ -1,0 +1,437 @@
+<?xml version="1.0"?>
+
+<robot name="base" xmlns:xacro="http://ros.org/wiki/xacro">
+
+  <!-- Define a number of dimensions using properties -->
+  <xacro:property name="base_size_x" value="0.20" />
+  <xacro:property name="base_size_y" value="0.22" />
+  <xacro:property name="base_size_z" value="0.20" />
+  <xacro:property name="arm_length" value="0.2" />
+  <xacro:property name="arm_radius" value="0.03" />
+  <xacro:property name="arm_offset_x" value="0.00" />
+  <xacro:property name="arm_offset_y" value="0.14" />
+  <xacro:property name="arm_offset_z" value="0" />
+  <xacro:property name="leg_length" value="0.2" />
+  <xacro:property name="leg_radius" value="0.06191" />
+  <xacro:property name="leg_offset_x" value="0.00" />
+  <xacro:property name="leg_offset_y" value="0.055" />
+  <xacro:property name="leg_offset_z" value="-0.1" />
+  <xacro:property name="mx_size_x" value="0.040" />
+  <xacro:property name="mx_size_y" value="0.041" />
+  <xacro:property name="mx_size_z" value="0.061" />
+  <xacro:property name="bleg_size_x" value="0.05" />
+  <xacro:property name="bleg_size_y" value="0.005" />
+  <xacro:property name="bleg_size_z" value="0.20" />
+  <xacro:property name="foot_size_x" value="0.20" />
+  <xacro:property name="foot_size_y" value="0.10" />
+  <xacro:property name="foot_size_z" value="0.001" />
+  <xacro:property name="motor_mass" value="0.15" />
+  <xacro:property name="body_mass" value="1" />
+
+
+
+
+
+  <property name="PI" value="3.1415" />
+  <!-- The base xacro macro -->
+  <macro name="base" params="name color">
+    
+    <link name="${name}_link">
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+          <box size="${base_size_x} ${base_size_y} ${base_size_z}" />
+        </geometry>
+        <material name="${color}" />
+      </visual>
+
+      <collision>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+          <box size="${base_size_x} ${base_size_y} ${base_size_z}" />
+        </geometry>
+      </collision>
+      <inertial>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <mass value="${body_mass}"/>
+        <inertia ixx="0.12259691"  ixy="0.00071127469"  ixz="0.00081143913" iyx="0.00071127469" iyy="0.11066637" iyz="-0.0071635476" izx="0.00081143913" izy="-0.0071635476" izz="0.041877668" />
+      </inertial>
+    </link>
+  </macro>
+  
+  <link name="base_footprint">
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+          <box size="0.05 0.05 0.001" />
+        </geometry>
+        <material name="TransparentGreen" />
+      </visual>
+      <!-- big mass for test -->
+<!--       <collision>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+          <box size="0.05 0.05 0.001" />
+        </geometry>
+        <material name="TransparentGreen" />
+      </collision>
+
+      <inertial>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <mass value="1500"/>
+        <inertia
+          ixx="1.0" ixy="0.0" ixz="0.0"
+          iyy="1.0" iyz="0.0"
+          izz="1.0"/>
+      </inertial> -->
+      <!-- big mass for test -->
+  </link>
+
+
+  
+  <joint name="base_joint" type="fixed">
+    <origin xyz="0 0 0.6" rpy="0 0 0" />        
+    <parent link="base_footprint"/>
+    <child link="base_link" />
+  </joint>
+
+  <!-- define a arm -->
+
+  <macro name="arm" params="suffix parent reflect color">
+
+    <joint name="armj_${suffix}1" type="continuous">
+      <axis xyz="0 1 0" />
+      <origin xyz="${arm_offset_x} ${reflect*arm_offset_y} ${arm_offset_z}" rpy="0 0 0" />
+      <parent link="${parent}_link"/>
+      <child link="arm_motor_${suffix}1"/>
+      <dynamics damping="0.3"/>
+    </joint>
+
+    <link name="arm_motor_${suffix}1">
+      <visual>
+        <origin xyz="0 0 -0.1" rpy="0 0 ${PI/2}" />
+        <geometry>
+          <cylinder radius="${arm_radius}" length="${arm_length}"/>
+        </geometry>
+        <material name="${color}" />
+      </visual>
+
+      <collision>
+        <origin xyz="0 0 -0.1" rpy="0 0 ${PI/2}" />
+        <geometry>
+          <cylinder radius="${arm_radius}" length="${arm_length}"/>
+        </geometry>
+        <material name="${color}" />
+      </collision>
+
+     <inertial>
+        <origin xyz="0 0 ${-mx_size_z/2}" rpy="0 0 0"/>
+        <mass value="${motor_mass}"/>
+        <inertia ixx="0.12259691"  ixy="0.00071127469"  ixz="0.00081143913" iyx="0.00071127469" iyy="0.11066637" iyz="-0.0071635476" izx="0.00081143913" izy="-0.0071635476" izz="0.041877668" />
+      </inertial>
+
+    </link>
+
+    <!-- define forearm -->
+
+    <joint name="armj_${suffix}18" type="continuous">
+      <axis xyz="0 1 0" />
+      <origin xyz="0 0 -.2" rpy="0 0 0" />
+      <parent link="arm_motor_${suffix}1"/>
+      <child link="arm_motor_${suffix}18"/>
+      <dynamics damping="0.3"/>
+    </joint>
+
+    <link name="arm_motor_${suffix}18">
+      <visual>
+        <origin xyz="0 0 -0.1" rpy="0 0 ${PI/2}" />
+        <geometry>
+          <cylinder radius="${arm_radius}" length="${arm_length}"/>
+        </geometry>
+        <material name="${color}" />
+      </visual>
+
+      <collision>
+        <origin xyz="0 0 -0.1" rpy="0 0 ${PI/2}" />
+        <geometry>
+          <cylinder radius="${arm_radius}" length="${arm_length}"/>
+        </geometry>
+        <material name="${color}" />
+      </collision>
+
+       <inertial>
+        <origin xyz="0 0 ${-mx_size_z/2}" rpy="0 0 0"/>
+        <mass value="${motor_mass}"/>
+        <inertia ixx="0.12259691"  ixy="0.00071127469"  ixz="0.00081143913" iyx="0.00071127469" iyy="0.11066637" iyz="-0.0071635476" izx="0.00081143913" izy="-0.0071635476" izz="0.041877668" />
+      </inertial>
+    </link>
+
+
+  </macro>
+
+
+
+<!-- define a leg -->
+
+  <macro name="leg" params="suffix parent reflect color">
+
+  <!-- define JOINT 3 (2motors)-->
+
+    <joint name="legj_${suffix}3" type="revolute">
+      <axis xyz="1 0 0" />
+      <origin xyz="${leg_offset_x} ${reflect*leg_offset_y} ${leg_offset_z}" rpy="0 0 0" />
+      <parent link="${parent}_link"/>
+      <child link="leg_motor_${suffix}3"/>
+      <dynamics damping="0.3"/>
+      <limit effort="2.8" velocity="5.6548668" lower="-2.6179939" upper="2.6179939" />
+    </joint>
+
+    <link name="leg_motor_${suffix}3">
+      <visual>
+        <origin xyz="0 0 ${-mx_size_z/2}" rpy="0 0 0" />
+        <geometry>
+          <box size="${mx_size_x*2)} ${mx_size_y} ${mx_size_z}" />
+        </geometry>
+        <material name="${color}" />
+      </visual>
+
+      <collision>
+        <origin xyz="0 0 ${-mx_size_z/2}" rpy="0 0 0" />
+        <geometry>
+          <box size="${mx_size_x*2)} ${mx_size_y} ${mx_size_z}" />
+        </geometry>
+        <material name="${color}" />
+      </collision>
+
+      <inertial>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <mass value="${motor_mass*2}"/>
+        <inertia ixx="0.12259691"  ixy="0.00071127469"  ixz="0.00081143913" iyx="0.00071127469" iyy="0.11066637" iyz="-0.0071635476" izx="0.00081143913" izy="-0.0071635476" izz="0.041877668" />
+      </inertial>
+
+    </link>
+
+  <!-- define Joint 2 (link)-->
+
+    <joint name="legj_${suffix}2" type="continuous">
+      <axis xyz="0 1 0" />
+      <origin xyz="${mx_size_x/2*0} 0 ${-mx_size_z/2}" rpy="0 0 0" />
+      <parent link="leg_motor_${suffix}3"/>
+      <child link="leg_link_${suffix}2"/>
+      <dynamics damping="0.3"/>
+    </joint>
+
+    <link name="leg_link_${suffix}2">
+      <visual>
+        <origin xyz="0 ${reflect*mx_size_y/2} ${-bleg_size_z/2}" rpy="0 0 0" />
+        <geometry>
+          <box size="${bleg_size_x} ${bleg_size_y} ${bleg_size_z}" />
+        </geometry>
+        <material name="Red" />
+      </visual>
+
+      <collision>
+        <origin xyz="0 ${reflect*mx_size_y/2} ${-bleg_size_z/2}" rpy="0 0 0" />
+        <geometry>
+          <box size="${bleg_size_x} ${bleg_size_y} ${bleg_size_z}" />
+        </geometry>
+        <material name="Red" />
+      </collision>  
+
+      <inertial>
+        <origin xyz="0 0 ${-mx_size_z/2}" rpy="0 0 0"/>
+        <mass value="0.030"/>
+        <inertia ixx="0.12259691"  ixy="0.00071127469"  ixz="0.00081143913" iyx="0.00071127469" iyy="0.11066637" iyz="-0.0071635476" izx="0.00081143913" izy="-0.0071635476" izz="0.041877668" />
+      </inertial>  
+
+    </link>
+
+  <!-- define motor 5 (motor)-->
+
+    <joint name="legj_${suffix}55" type="fixed">
+      <axis xyz="0 1 0" />
+      <origin xyz="0 ${-reflect*0} -${bleg_size_z}" rpy="0 0 0" />
+      <parent link="leg_link_${suffix}2"/>
+      <child link="leg_motor_${suffix}5"/>
+    </joint>
+
+    <link name="leg_motor_${suffix}5">
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+          <box size="${mx_size_x} ${mx_size_y} ${mx_size_z}" />
+        </geometry>
+        <material name="Black" />
+      </visual>
+
+      <collision>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+          <box size="${mx_size_x} ${mx_size_y} ${mx_size_z}" />
+        </geometry>
+        <material name="Black" />
+      </collision>
+
+      <inertial>
+        <origin xyz="0 0 ${-mx_size_z/2}" rpy="0 0 0"/>
+        <mass value="${motor_mass}"/>
+        <inertia ixx="0.12259691"  ixy="0.00071127469"  ixz="0.00081143913" iyx="0.00071127469" iyy="0.11066637" iyz="-0.0071635476" izx="0.00081143913" izy="-0.0071635476" izz="0.041877668" />
+      </inertial>
+    </link>
+
+  <!-- define JOINT 5 (link)-->
+
+    <joint name="legj_${suffix}5" type="continuous">
+      <axis xyz="0 1 0" />
+      <origin xyz="0 ${reflect*0} ${-bleg_size_z}" rpy="0 0 0" />
+      <parent link="leg_link_${suffix}2"/>
+      <child link="leg_link_${suffix}5"/>
+      <dynamics damping="0.3"/>
+    </joint>
+
+    <link name="leg_link_${suffix}5">
+      <visual>
+        <origin xyz="0 ${reflect*mx_size_y/2} ${-bleg_size_z/2}" rpy="0 0 0" />
+        <geometry>
+          <box size="${bleg_size_x} ${bleg_size_y} ${bleg_size_z}" />
+        </geometry>
+        <material name="Red" />
+      </visual>
+
+      <collision>
+        <origin xyz="0 ${reflect*mx_size_y/2} ${-bleg_size_z/2}" rpy="0 0 0" />
+        <geometry>
+          <box size="${bleg_size_x} ${bleg_size_y} ${bleg_size_z}" />
+        </geometry>
+        <material name="Red" />
+      </collision>
+
+      <inertial>
+        <origin xyz="0 0 ${-mx_size_z/2}" rpy="0 0 0"/>
+        <mass value="0.030"/>
+        <inertia ixx="0.12259691"  ixy="0.00071127469"  ixz="0.00081143913" iyx="0.00071127469" iyy="0.11066637" iyz="-0.0071635476" izx="0.00081143913" izy="-0.0071635476" izz="0.041877668" />
+      </inertial>
+    </link>
+
+  <!-- define JOINT 6 (motor)-->
+  
+    <joint name="legj_${suffix}6" type="continuous">
+      <axis xyz="0 1 0" />
+      <origin xyz="0 0 ${-bleg_size_z}" rpy="0 0 0" />
+      <parent link="leg_link_${suffix}5"/>
+      <child link="leg_motor_${suffix}6"/>
+      <dynamics damping="0.3"/>
+    </joint>
+    <link name="leg_motor_${suffix}6">
+      <visual>
+        <origin xyz="0 ${-reflect*0} 0" rpy="0 0 0" />
+        <geometry>
+          <box size="${mx_size_x} ${mx_size_y} ${mx_size_z}" />
+        </geometry>
+        <material name="Black" />
+      </visual>
+
+      <collision>
+        <origin xyz="0 ${-reflect*0} 0" rpy="0 0 0" />
+        <geometry>
+          <box size="${mx_size_x} ${mx_size_y} ${mx_size_z}" />
+        </geometry>
+        <material name="Black" />
+      </collision>
+
+      <inertial>
+        <origin xyz="0 0 ${-mx_size_z/2}" rpy="0 0 0"/>
+        <mass value="${motor_mass}"/>
+        <inertia ixx="0.12259691"  ixy="0.00071127469"  ixz="0.00081143913" iyx="0.00071127469" iyy="0.11066637" iyz="-0.0071635476" izx="0.00081143913" izy="-0.0071635476" izz="0.041877668" />
+      </inertial>
+    </link>
+
+  <!-- define MOTOR 7 (motor)-->
+    <joint name="legj_${suffix}77" type="fixed">
+      <axis xyz="0 1 0" />
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <parent link="leg_motor_${suffix}6"/>
+      <child link="leg_motor_${suffix}7"/>
+    </joint>
+    <link name="leg_motor_${suffix}7">
+      <visual>
+        <origin xyz="${-mx_size_x} ${-reflect*0} 0" rpy="0 0 0" />
+        <geometry>
+          <box size="${mx_size_x} ${mx_size_y} ${mx_size_z}" />
+        </geometry>
+        <material name="Black" />
+      </visual>
+
+      <collision>
+        <origin xyz="${-mx_size_x} ${-reflect*0} 0" rpy="0 0 0" />
+        <geometry>
+          <box size="${mx_size_x} ${mx_size_y} ${mx_size_z}" />
+        </geometry>
+        <material name="Black" />
+      </collision>
+
+      <inertial>
+        <origin xyz="0 0 ${-mx_size_z/2}" rpy="0 0 0"/>
+        <mass value="${motor_mass}"/>
+        <inertia ixx="0.12259691"  ixy="0.00071127469"  ixz="0.00081143913" iyx="0.00071127469" iyy="0.11066637" iyz="-0.0071635476" izx="0.00081143913" izy="-0.0071635476" izz="0.041877668" />
+      </inertial>
+    </link>
+
+  <!-- define joint 7 (link)-->
+    <joint name="legj_${suffix}7" type="continuous">
+      <axis xyz="1 0 0" />
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <parent link="leg_motor_${suffix}7"/>
+      <child link="leg_link_${suffix}7"/>
+      <dynamics damping="0.3"/>
+    </joint>
+    <link name="leg_link_${suffix}7">
+      <visual>
+        <origin xyz="${0} ${-reflect*0} ${-mx_size_z}" rpy="0 0 0" />
+        <geometry>
+          <box size="${foot_size_x} ${foot_size_y} ${foot_size_z}" />
+        </geometry>
+        <material name="Red" />
+      </visual>
+
+      <collision>
+        <origin xyz="${0} ${-reflect*0} ${-mx_size_z}" rpy="0 0 0" />
+        <geometry>
+          <box size="${foot_size_x} ${foot_size_y} ${foot_size_z}" />
+        </geometry>
+        <material name="Red" />
+      </collision>
+
+      <inertial>
+        <origin xyz="0 0 ${-mx_size_z/2}" rpy="0 0 0"/>
+        <mass value="0.030"/>
+        <inertia ixx="0.12259691"  ixy="0.00071127469"  ixz="0.00081143913" iyx="0.00071127469" iyy="0.11066637" iyz="-0.0071635476" izx="0.00081143913" izy="-0.0071635476" izz="0.041877668" />
+      </inertial>
+    </link>
+
+
+  </macro>
+
+
+
+   <!-- Add the drive arms -->
+   <arm parent="base" suffix="l" reflect="1" color="Orange"/>
+   <arm parent="base" suffix="r" reflect="-1" color="Orange"/>
+   <leg parent="base" suffix="l" reflect="1" color="Black"/>
+   <leg parent="base" suffix="r" reflect="-1" color="Black"/>
+
+
+
+<!--   <transmission name="tran_${suffix}_2">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="legj_${suffix}2">
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="motor_${suffix}_2">
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission> -->
+
+
+</robot>

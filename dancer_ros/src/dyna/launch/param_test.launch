@@ -1,0 +1,10 @@
+<!-- -*- mode: XML -*- -->
+
+<launch> 
+	<!-- Load joint controller configurations from YAML file to parameter server -->
+  	<rosparam file="$(find dyna)/config/param_test.yaml" command="load"/>
+	<node pkg="dyna" name="param_test" type="param_test"
+          output="screen" />
+	
+
+</launch>

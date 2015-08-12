@@ -1,0 +1,63 @@
+
+# Built using gitignore templates from https://github.com/github/gitignore
+
+# Backup
+*.*~
+
+# C++.gitignore
+# Compiled Object files
+*.slo
+*.lo
+*.o
+
+# Compiled Dynamic libraries
+*.so
+*.dylib
+
+# Compiled Static libraries
+*.lai
+*.la
+*.a
+*.l
+
+# CMake.gitignore
+CMakeCache.txt
+CMakeFiles
+# Makefile is part of ROS packages (outside build dir)
+#Makefile
+cmake_install.cmake
+install_manifest.txt
+
+# Python.gitignore
+*.py[co]
+
+# Packages
+*.egg
+*.egg-info
+dist
+build
+eggs
+parts
+bin
+develop-eggs
+lib
+msg_gen
+srv_gen
+.installed.cfg
+
+# Installer logs
+pip-log.txt
+
+# Unit test / coverage reports
+.coverage
+.tox
+
+# Eclipse project files
+#.project
+#.cproject
+#.pydevproject
+
+# ROS
+*.cfgc
+docs
+*.bag*

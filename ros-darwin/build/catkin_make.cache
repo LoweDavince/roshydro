@@ -1,0 +1,2 @@
+darwin_control:darwin_description:darwin_gazebo
+-DCATKIN_DEVEL_PREFIX=/home/d/ros-darwin/devel -DCMAKE_INSTALL_PREFIX=/home/d/ros-darwin/install

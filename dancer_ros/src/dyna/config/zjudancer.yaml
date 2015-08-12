@@ -1,0 +1,66 @@
+# id rx2 rx5 mx9 mx10 mx12 controller
+id2_controller:
+    controller:
+        package: dynamixel_controllers
+        module: joint_position_controller
+        type: JointPositionController
+    joint_name: id_2
+    joint_speed: 10
+    motor:
+        id: 1
+        init: 0
+        min: 0
+        max: 1023
+
+
+id5_controller:
+    controller:
+        package: dynamixel_controllers
+        module: joint_position_controller
+        type: JointPositionController
+    joint_name: id_5
+    joint_speed: 10
+    motor:
+        id: 0
+        init: 0
+        min: 0
+        max: 1023
+
+id9_controller:
+    controller:
+        package: dynamixel_controllers
+        module: joint_position_controller
+        type: JointPositionController
+    joint_name: id_9
+    joint_speed: 10
+    motor:
+        id: 9
+        init: 0
+        min: 0
+        max: 4095
+
+id10_controller:
+    controller:
+        package: dynamixel_controllers
+        module: joint_position_controller
+        type: JointPositionController
+    joint_name: id_10
+    joint_speed: 10
+    motor:
+        id: 10
+        init: 0
+        min: 0
+        max: 4095
+
+id12_controller:
+    controller:
+        package: dynamixel_controllers
+        module: joint_position_controller
+        type: JointPositionController
+    joint_name: id_12
+    joint_speed: 10
+    motor:
+        id: 12
+        init: 0
+        min: 0
+        max: 4095

@@ -1,0 +1,17 @@
+<package>
+  <description brief="Chapter 4 tutorials">
+    Chapter 4 tutorials.
+    Learning ROS for Robotics Programming
+  </description>
+  <author>Aaron Martinez, Enrique Fernández</author>
+  <license>GPL</license>
+  <review status="reviewed" notes=""/>
+  <url>http://www.packtpub.com/learning-ros-for-robotics-programming/book</url>
+  <depend package="geometry_msgs"/>
+  <depend package="std_msgs"/>
+  <depend package="joy"/>
+  <depend package="pcl"/>
+  <depend package="tf"/>
+</package>
+
+

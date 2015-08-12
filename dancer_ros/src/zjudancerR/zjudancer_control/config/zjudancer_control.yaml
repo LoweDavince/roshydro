@@ -1,0 +1,85 @@
+zjudancer:
+  # Publish all joint states -----------------------------------
+  joint_state_controller:
+    type: joint_state_controller/JointStateController
+    publish_rate: 100
+
+  #5Position Controllers ---------------------------------------
+  armj_r1_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: armj_r1
+    #pid: {p: 500.0, i: 500, d: 550.0}
+    pid: {p: 500, i: 5, d: 50.0}
+  armj_l1_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: armj_l1
+    #pid: {p: 500.0, i: 500, d: 550.0}
+    pid: {p: 500, i: 5, d: 10.0}
+
+  armj_r18_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: armj_r18
+    #pid: {p: 500.0, i: 500, d: 550.0}
+    pid: {p: 500, i: 5, d: 10.0}
+  armj_l18_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: armj_l18
+    #pid: {p: 500.0, i: 500, d: 550.0}
+    pid: {p: 500, i: 5, d: 10.0}
+
+
+  legj_l2_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: legj_l2
+    #pid: {p: 500.0, i: 500, d: 550.0}
+    pid: {p: 500, i: 5, d: 10.0}
+  legj_r2_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: legj_r2
+    #pid: {p: 500.0, i: 500, d: 550.0}
+    pid: {p: 500, i: 5, d: 10.0}
+
+  legj_l3_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: legj_l3
+    #pid: {p: 500.0, i: 500, d: 550.0}
+    pid: {p: 500, i: 5, d: 10.0}
+  legj_r3_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: legj_r3
+    #pid: {p: 500.0, i: 500, d: 550.0}
+    pid: {p: 500, i: 5, d: 10.0}
+
+  legj_l5_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: legj_l5
+    #pid: {p: 500.0, i: 500, d: 550.0}
+    pid: {p: 500, i: 5, d: 10.0}
+  legj_r5_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: legj_r5
+    #pid: {p: 500.0, i: 500, d: 550.0}
+    pid: {p: 500, i: 5, d: 10.0}
+
+  legj_l6_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: legj_l6
+    #pid: {p: 500.0, i: 500, d: 550.0}
+    pid: {p: 500, i: 5, d: 10.0}
+  legj_r6_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: legj_r6
+    #pid: {p: 500.0, i: 500, d: 550.0}
+    pid: {p: 500, i: 5, d: 10.0}
+
+  legj_l7_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: legj_l7
+    #pid: {p: 500.0, i: 500, d: 550.0}
+    pid: {p: 500, i: 5, d: 10.0}
+  legj_r7_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: legj_r7
+    #pid: {p: 500.0, i: 500, d: 550.0}
+    pid: {p: 500, i: 5, d: 10.0}
+

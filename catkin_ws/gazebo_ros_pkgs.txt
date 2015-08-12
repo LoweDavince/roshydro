@@ -1,0 +1,8 @@
+git clone https://github.com/ros-simulation/gazebo_ros_pkgs.git
+
+ros-hydro-controller-manager ros-hydro-control-toolbox
+hardware_interface
+transmission_interface
+joint_limits_interface
+ros-hydro-ros-control
+ros-hydro-ros-controllers

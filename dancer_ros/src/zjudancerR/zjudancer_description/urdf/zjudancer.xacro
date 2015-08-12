@@ -1,0 +1,175 @@
+<?xml version="1.0"?>
+
+<robot name="zjudancer" xmlns:xacro="http://ros.org/wiki/xacro">
+
+   <!-- Include all component files -->
+   <xacro:include filename="$(find zjudancer_description)/urdf/materials.urdf.xacro" />
+
+   <xacro:include filename="$(find zjudancer_description)/urdf/base.urdf.xacro" />
+
+   <!-- Import all Gazebo-customization elements, including Gazebo colors -->
+  <xacro:include filename="$(find zjudancer_description)/urdf/zjudancer.gazebo" />
+   
+   <!-- Add the base and wheels -->
+   <base name="base" color="Black"/>
+
+   <transmission name="tran_r1">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="armj_r1">
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="motor_r1">
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+  <transmission name="tran_l1">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="armj_l1">
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="motor_l1">
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+  <transmission name="tran_r18">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="armj_r18">
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="motor_r18">
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+  <transmission name="tran_l18">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="armj_l18">
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="motor_l18">
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+
+   <transmission name="tran_r3">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="legj_r3">
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="motor_r3">
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+  <transmission name="tran_l3">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="legj_l3">
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="motor_l3">
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+     <transmission name="tran_r2">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="legj_r2">
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="motor_r2">
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+  <transmission name="tran_l2">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="legj_l2">
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="motor_l2">
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+     <transmission name="tran_r5">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="legj_r5">
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="motor_r5">
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+  <transmission name="tran_l5">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="legj_l5">
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="motor_l5">
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+       <transmission name="tran_r6">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="legj_r6">
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="motor_r6">
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+  <transmission name="tran_l6">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="legj_l6">
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="motor_l6">
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+       <transmission name="tran_r7">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="legj_r7">
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="motor_r7">
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+  <transmission name="tran_l7">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="legj_l7">
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="motor_l7">
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+
+
+</robot>
+
+

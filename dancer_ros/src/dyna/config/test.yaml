@@ -1,0 +1,8 @@
+param_test:
+	test_one:
+	type: a/b
+	num: 1
+	test_two:
+	type: c/d
+	num:2
+	array:{e:3, f:4, g:5}

@@ -1,0 +1,15 @@
+<launch>
+    <!-- Load controller configuration to parameter server -->
+    <rosparam file="$(find dyna)/config/zjudancer.yaml" command="load"/>
+    
+    <!-- start specified joint controllers -->
+    <node name="dynamixel_controller_spawner" pkg="dynamixel_controllers" type="controller_spawner.py"
+          args="--manager=dxl_manager
+                --port=test_port
+                --type=simple
+                id10_controller
+	            id2_controller
+	            id5_controller
+                id9_controller"
+          output="screen"/>
+</launch>
